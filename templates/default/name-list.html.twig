@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Список буквенных имен</h1>
+    <table class="table-sms-names">
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Статус</th>
+            <th>Дата</th>
+            <th>Примечание</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for name_sms in name_list %}
+            <tr>
+                <td>{{ name_sms.name }}</td>
+                <td>{{ name_sms.status }}</td>
+                <td>{{ name_sms.date_op }}</td>
+                <td>{{ name_sms.message }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

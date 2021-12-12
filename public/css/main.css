@@ -1,0 +1,59 @@
+.main-menu {
+    background-color: antiquewhite;
+    border: #a46a1f solid 1px;
+    border-radius: 5px;
+}
+
+.main-menu ul {
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu ul li {
+    display: inline-block;
+    height: 30px;
+    min-width: 50px;
+    text-align: center;
+    margin: 0;
+    padding: 3px 5px;
+    line-height: 30px;
+    border: #a46a1f solid 1px;
+    cursor: pointer;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+
+.main-menu ul li:hover {
+    background-color: #a78766;
+}
+
+input[type=text] {
+    height: 30px;
+    font-size: 20px;
+    border-color: cornsilk;
+    border-radius: 5px;
+}
+
+input[type=submit] {
+    padding: 5px 15px;
+    background: #ccc;
+    border: 0 none;
+    cursor: pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.table-sms-names {
+    border: black solid 1px;
+    border-collapse: collapse;
+}
+
+.table-sms-names th {
+    border: black solid 2px;
+}
+
+.table-sms-names td {
+    border: 1px solid grey;
+    padding: 1px 3px;
+}

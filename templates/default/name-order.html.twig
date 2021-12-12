@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Форма заказа буквенного имени</h1>
+    <form method="post">
+        <div style="display: inline-block">
+            <input type="text" name="sms_name" placeholder="Укажите желаемое имя" value="{{ params['sms_name'] }}">
+            <div>{{ sms_name_status }}</div>
+        </div>
+        <div style="display: inline-block;vertical-align: top;padding: 7px 0 0 0">
+            <input type="submit" name="submit" value="Заказать">
+        </div>
+    </form>
+{% endblock %}
