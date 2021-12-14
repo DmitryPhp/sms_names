@@ -13,12 +13,12 @@ class NameSms
     private
         $conn,
         $validator,
-        $name_sms,
+        $name_sms_model,
         $logger;
 
-    public function __construct(Connection $conn, ValidatorInterface $validator, LoggerInterface $logger)
+    public function __construct(Connection $conn, ValidatorInterface $validator, LoggerInterface $logger, NameSmsModel $name_sms_model)
     {
-        $this->name_sms = new NameSmsModel();
+        $this->name_sms_model = $name_sms_model;
         $this->conn = $conn;
         $this->validator = $validator;
         $this->logger = $logger;
@@ -32,9 +32,9 @@ class NameSms
      */
     public function nameCheck(int $user_id, string $name): ResultJson
     {
-        $this->name_sms->name = $name;
+        $this->name_sms_model->name = $name;
 
-        $errors = $this->validator->validate($this->name_sms);
+        $errors = $this->validator->validate($this->name_sms_model);
         if (count($errors) > 0) {
             $err_str = $errors->get(0);
             return new ResultJson(400, $err_str->getMessage());
@@ -46,7 +46,7 @@ class NameSms
                     LEFT JOIN name_operation_reasons nor on nop.id = nor.name_operations_id
                 WHERE ns.name = ? AND ns.id = nop.name_id
                 ORDER BY nop.date_op DESC LIMIT 1";
-        $name_status = $this->conn->fetchAssociative($q, [$this->name_sms->name]);
+        $name_status = $this->conn->fetchAssociative($q, [$this->name_sms_model->name]);
         if (!$name_status)
             return new ResultJson(200, 'Name is free');
         elseif ($name_status['user_id'] && $name_status['user_id'] != $user_id)
@@ -73,7 +73,7 @@ class NameSms
         try {
             $this->conn->insert('name_sms', [
                 "user_id" => $user_id,
-                "name" => $this->name_sms->name,
+                "name" => $this->name_sms_model->name,
             ]);
             $name_id = $this->conn->lastInsertId();
             $this->conn->insert('name_operations', [
